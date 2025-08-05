@@ -1,0 +1,26 @@
+# Add 'root' label to any root file changes
+# Quotation marks are required for the leading asterisk
+go:
+  - changed-files:
+      - any-glob-to-any-file: "cmd/**.go"
+      - any-glob-to-any-file: "internal/**.go"
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file: "go.mod"
+      - any-glob-to-any-file: "go.sum"
+
+# Add 'Documentation' label to any changes within 'docs' folder or any subfolders
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: docs/**
+
+# Add 'release' label to any PR that is opened against the `main` branch
+release:
+  - base-branch: "main"
+
+# Add 'root' label to any root file changes
+# Quotation marks are required for the leading asterisk
+ci:
+  - changed-files:
+      - any-glob-to-any-file: .github/**
