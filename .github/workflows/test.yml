@@ -27,6 +27,7 @@ jobs:
         with:
           mode: validate
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+          noop-labels: dont-release
   golangci:
     name: lint
     runs-on: ubuntu-latest
