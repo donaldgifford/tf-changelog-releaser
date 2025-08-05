@@ -20,6 +20,15 @@ jobs:
         uses: golangci/golangci-lint-action@v8
         with:
           version: v2.3.0
+  labeler:
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
   test:
     runs-on: ubuntu-latest
@@ -45,10 +54,6 @@ jobs:
       - name: Run tests
         run: go test -v -coverprofile=coverage.out ./...
 
-      - name: Convert to junit
-        run: go install github.com/jstemmer/go-junit-report/v2@latest
-          go-junit-report -in coverage.out -iocopy -out report.xml
-
       - name: Run go vet
         run: go vet ./...
 
@@ -69,10 +74,3 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: donaldgifford/tf-changelog-releaser
           file: ./coverage.out
-      - name: Upload test results to Codecov
-        if: ${{ !cancelled() }}
-        uses: codecov/test-results-action@v1
-        with:
-          file: ./report.xml
-          flags: unittests
-          token: ${{ secrets.CODECOV_TOKEN }}
