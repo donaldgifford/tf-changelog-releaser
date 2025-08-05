@@ -1,0 +1,34 @@
+# Add 'root' label to any root file changes
+# Quotation marks are required for the leading asterisk
+go:
+  - changed-files:
+      - any-glob-to-any-file: "cmd/**.go"
+      - any-glob-to-any-file: "internal/**.go"
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file: "go.mod"
+      - any-glob-to-any-file: "go.sum"
+
+# Add 'Documentation' label to any changes within 'docs' folder or any subfolders
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: docs/**
+      - any-glob-to-any-file: README.md
+
+# Add 'root' label to any root file changes
+# Quotation marks are required for the leading asterisk
+ci:
+  - changed-files:
+      - any-glob-to-any-file: .github/**
+
+repo:
+  - changed-files:
+      - any-glob-to-any-file: codecov.yaml
+      - any-glob-to-any-file: .golangci-lint.yml
+      - any-glob-to-any-file: .goreleaser.yaml
+      - any-glob-to-any-file: .tool-versions
+
+docker:
+  - changed-files:
+      - any-glob-to-any-file: Dockerfile

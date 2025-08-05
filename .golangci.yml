@@ -1,0 +1,170 @@
+# version: "2"
+#
+# run:
+#   timeout: 5m
+#
+# formatters:
+#   enable:
+#     - gofmt
+#     - goimports
+#
+# linters:
+#   default: none
+#   enable:
+#     #- bodyclose
+#     #- depguard
+#     #- dogsled
+#     #- dupl
+#     - errcheck
+#     #- exhaustive
+#     #- funlen
+#     #- gochecknoinits
+#     - goconst
+#     - gocritic
+#     #- gocyclo
+#     #- goprintffuncname
+#     - gosec
+#     - govet
+#     - ineffassign
+#     #- lll
+#     - misspell
+#     #- mnd
+#     #- nakedret
+#     #- noctx
+#     - nolintlint
+#     #- rowserrcheck
+#     - staticcheck
+#     - unconvert
+#     #- unparam
+#     - unused
+#     #- whitespace
+#   exclusions:
+#     presets:
+#       - common-false-positives
+#       - legacy
+#       - std-error-handling
+version: "2"
+run:
+  tests: true
+  relative-path-mode: wd
+  allow-parallel-runners: true
+output:
+  formats:
+    tab:
+      path: stdout
+      colors: false
+linters:
+  default: none
+  enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - contextcheck
+    - durationcheck
+    - errcheck
+    - errchkjson
+    - errorlint
+    - exhaustive
+    - gocheckcompilerdirectives
+    - gochecksumtype
+    - goconst
+    - gocritic
+    - gocyclo
+    - gosec
+    - gosmopolitan
+    - govet
+    - ineffassign
+    - loggercheck
+    - makezero
+    - misspell
+    - musttag
+    - nakedret
+    - nilerr
+    - nilnesserr
+    - noctx
+    - prealloc
+    - protogetter
+    - reassign
+    - recvcheck
+    - rowserrcheck
+    - spancheck
+    - sqlclosecheck
+    - staticcheck
+    - testifylint
+    - unconvert
+    - unparam
+    - unused
+    - zerologlint
+  settings:
+    dupl:
+      threshold: 100
+    goconst:
+      min-len: 3
+      min-occurrences: 5
+    gocritic:
+      enabled-tags:
+        - performance
+      settings:
+        captLocal:
+          paramsOnly: true
+        rangeValCopy:
+          sizeThreshold: 32
+    gocyclo:
+      min-complexity: 10
+    lll:
+      line-length: 80
+      tab-width: 1
+    misspell:
+      locale: US
+    nakedret:
+      max-func-lines: 30
+    prealloc:
+      simple: true
+      range-loops: true
+      for-loops: false
+    unparam:
+      check-exported: false
+    unused:
+      exported-fields-are-used: false
+  exclusions:
+    generated: lax
+    rules:
+      - linters:
+          - dupl
+          - errcheck
+          - goconst
+          - gocyclo
+          - gosec
+          - scopelint
+          - unparam
+        path: _test(ing)?\.go
+      - linters:
+          - gosec
+        text: "G306:"
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+issues:
+  max-same-issues: 0
+  new: false
+formatters:
+  enable:
+    - gofmt
+    - goimports
+    - golines
+  settings:
+    gofmt:
+      simplify: true
+    goimports:
+      local-prefixes:
+        - github.com/donaldgifford/tf-changelog-releaser
+    golines:
+      max-len: 120
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
