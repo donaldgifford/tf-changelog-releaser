@@ -45,6 +45,10 @@ jobs:
       - name: Run tests
         run: go test -v -coverprofile=coverage.out ./...
 
+      - name: Convert to junit
+        run: go install github.com/jstemmer/go-junit-report/v2@latest
+          go-junit-report -in coverage.out -iocopy -out report.xml
+
       - name: Run go vet
         run: go vet ./...
 
@@ -64,5 +68,11 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: donaldgifford/tf-changelog-releaser
-          flags: unittests
           file: ./coverage.out
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          file: ./report.xml
+          flags: unittests
+          token: ${{ secrets.CODECOV_TOKEN }}
