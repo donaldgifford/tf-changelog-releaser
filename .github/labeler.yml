@@ -9,6 +9,7 @@ dependencies:
   - changed-files:
       - any-glob-to-any-file: "go.mod"
       - any-glob-to-any-file: "go.sum"
+      - any-glob-to-any-file: mise.toml
 
 # Add 'Documentation' label to any changes within 'docs' folder or any subfolders
 documentation:
@@ -27,7 +28,8 @@ repo:
       - any-glob-to-any-file: codecov.yaml
       - any-glob-to-any-file: .golangci-lint.yml
       - any-glob-to-any-file: .goreleaser.yaml
-      - any-glob-to-any-file: .tool-versions
+      - any-glob-to-any-file: .markdownlint.yaml
+      - any-glob-to-any-file: .prettierrc.yaml
 
 docker:
   - changed-files:
