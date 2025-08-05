@@ -1,0 +1,17 @@
+name: "Pull Request"
+on:
+  - pull_request_target
+
+permissions:
+  contents: read
+  pull_requests: write
+  id-token: read
+
+jobs:
+  labeler:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/labeler@v5
+        name: labeler
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
