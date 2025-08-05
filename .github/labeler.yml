@@ -14,13 +14,21 @@ dependencies:
 documentation:
   - changed-files:
       - any-glob-to-any-file: docs/**
-
-# Add 'release' label to any PR that is opened against the `main` branch
-release:
-  - base-branch: "main"
+      - any-glob-to-any-file: README.md
 
 # Add 'root' label to any root file changes
 # Quotation marks are required for the leading asterisk
 ci:
   - changed-files:
       - any-glob-to-any-file: .github/**
+
+repo:
+  - changed-files:
+      - any-glob-to-any-file: codecov.yaml
+      - any-glob-to-any-file: .golangci-lint.yml
+      - any-glob-to-any-file: .goreleaser.yaml
+      - any-glob-to-any-file: .tool-versions
+
+docker:
+  - changed-files:
+      - any-glob-to-any-file: Dockerfile
