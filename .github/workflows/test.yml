@@ -20,6 +20,15 @@ jobs:
         uses: golangci/golangci-lint-action@v8
         with:
           version: v2.3.0
+  labeler:
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
   test:
     runs-on: ubuntu-latest
@@ -64,5 +73,4 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: donaldgifford/tf-changelog-releaser
-          flags: unittests
           file: ./coverage.out

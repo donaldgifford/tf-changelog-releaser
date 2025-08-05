@@ -1,5 +1,7 @@
 # tf-changelog-releaser
 
+[![codecov](https://codecov.io/gh/donaldgifford/tf-changelog-releaser/graph/badge.svg?token=KQA7XTPRBT)](https://codecov.io/gh/donaldgifford/tf-changelog-releaser)
+
 tf-changelog-releaser is a golang based cli tool that creates a changelog and releases
 for terraform modules in a mono-repo style configuration. The inspiration for
 this tool comes from [terraform module releaser](https://github.com/techpivot/terraform-module-releaser) which is a similar tool that runs as a github action. This tool will allow you to generate the documentation, changelog, and release in a similar way just giving you the ability to run from the cli or github action.
