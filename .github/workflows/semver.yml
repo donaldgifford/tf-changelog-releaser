@@ -15,5 +15,5 @@ jobs:
         with:
           mode: bump
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          noop-labels: documentation
+          noop-labels: dont-release
           with-v: true
