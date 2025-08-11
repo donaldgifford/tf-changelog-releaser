@@ -24,49 +24,27 @@ func NewTerraformModule() *TerraformModules {
 }
 
 func (t *TerraformModules) GenerateDocs() (string, error) {
-	tempString := `
-# My super cool template
+	// 	tempString := `
+	// # My super cool template
+	//
+	// <!-- BEGIN_TF_DOCS -->
+	// {{ .Content }}
+	// <!-D- END_TF_DOCS -->
+	// `
 
-<!-- BEGIN_TF_DOCS -->
-{{ .Content }}
-<!-D- END_TF_DOCS -->
-`
+	for _, tf := range t.Modules {
+		d, err := BuildTerraformDocs(tf)
+		// d, err := BuildTerraformDocs(t.Path, tempString)
+		if err != nil {
+			return "", err
+		}
 
-	d, err := BuildTerraformDocs(t.Path, tempString)
-	if err != nil {
-		return "", err
+		fmt.Println(d)
+
 	}
 
-	return d, nil
+	return "", nil
 }
-
-// func examineFileType(fsys fs.FS, path string) error {
-// 	info, err := fs.Stat(fsys, path)
-// 	if err != nil {
-// 		return fmt.Errorf("cannot stat %s: %w", path, err)
-// 	}
-//
-// 	if info.IsDir() {
-// 		fmt.Printf("%s is a directory\n", path)
-// 		fmt.Printf(
-// 			"Directory size: %d bytes\n",
-// 			info.Size(),
-// 		) // Often system-dependent
-// 	} else {
-// 		fmt.Printf("%s is a regular file\n", path)
-// 		fmt.Printf("File size: %d bytes\n", info.Size())
-// 	}
-//
-// 	return nil
-// }
-//
-// func listDirectoryContents(fsys fs.FS, dirPath string) ([]fs.DirEntry, error) {
-// 	if readDirFS, ok := fsys.(fs.ReadDirFS); ok {
-// 		return readDirFS.ReadDir(dirPath)
-// 	}
-//
-// 	return nil, fmt.Errorf("filesystem does not support directory reading")
-// }
 
 func (t *TerraformModules) tfModuleDirWalker(
 	fsys fs.FS,
@@ -104,18 +82,6 @@ func (t *TerraformModules) tfModuleDirWalker(
 	}
 }
 
-// func tfModuleChecker() fs.WalkDirFunc {
-// 	// func tfModuleChecker(path string, d fs.DirEntry, err error) error {
-// 	return func(path string, d fs.DirEntry, err error) error {
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fmt.Println(path)
-// 		// fmt.Println(d.Info())
-// 		return nil
-// 	}
-// }
-
 func (t *TerraformModules) GenerateModules() error {
 	cwd, err := os.Getwd()
 	if err != nil {
@@ -133,26 +99,10 @@ func (t *TerraformModules) GenerateModules() error {
 	if err != nil {
 		return err
 	}
-	// dirs, err := listDirectoryContents(moduleFS, ".")
-	// if err != nil {
-	// 	return err
-	// }
-	//
-	// for _, dir := range dirs {
-	// 	t, err := listDirectoryContents(moduleFS, dir.Name())
-	// 	if err != nil {
-	// 		return err
-	// 	}
-	// 	for _, k := range t {
-	// 		if strings.Contains(k.Name(), ".tf") {
-	// 			fmt.Println("Terraform file found")
-	// 		}
-	// 	}
-	// }
-	// if slices.Contains(t, )
-	// fmt.Println(t)
 
 	fmt.Println(t.Modules)
 
 	return nil
 }
+
+// find docs dir

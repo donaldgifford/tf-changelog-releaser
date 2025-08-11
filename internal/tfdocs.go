@@ -7,9 +7,10 @@ import (
 )
 
 // BuildTerraformDocs for module root `path` and provided content `tmpl`.
-func BuildTerraformDocs(path string, tmpl string) (string, error) {
+func BuildTerraformDocs(tf TfModule) (string, error) {
+	// func BuildTerraformDocs(path string, tmpl string) (string, error) {
 	config := print.DefaultConfig()
-	config.ModuleRoot = path // module root path (can be relative or absolute)
+	config.ModuleRoot = tf.Path // module root path (can be relative or absolute)
 
 	module, err := terraform.LoadWithOptions(config)
 	if err != nil {
@@ -29,5 +30,6 @@ func BuildTerraformDocs(path string, tmpl string) (string, error) {
 	// `Content()` returns all the sections combined with predefined order.
 	// return formatter.Content(), nil
 
-	return formatter.Render(tmpl)
+	// return formatter.Render(tmpl)
+	return formatter.Content(), nil
 }

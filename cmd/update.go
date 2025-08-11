@@ -26,6 +26,8 @@ to quickly create a Cobra application.`,
 		if err != nil {
 			return
 		}
+
+		mods.GenerateDocs()
 		// string
 	},
 }
