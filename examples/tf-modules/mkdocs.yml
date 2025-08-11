@@ -1,0 +1,10 @@
+site_name: Example Terraform Modules
+site_description: Example repository demonstrating tf-changelog
+plugins:
+  - techdocs-core
+nav:
+  - Getting Started: index.md
+  - Latest Changes: CHANGELOG.md
+  - Modules:
+    - bucket: modules/bucket.md
+    - vpc: modules/vpc.md

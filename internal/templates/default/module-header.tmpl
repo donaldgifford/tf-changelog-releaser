@@ -1,0 +1,12 @@
+## Usage
+
+To use this module in your Terraform, refer to the below module example:
+
+```hcl
+module "aws_s3_bucket_object" {
+  source = "git::ssh://git@github.com/techpivot/terraform-modules-demo.git?ref=aws/s3-bucket-object/v1.0.2"
+  source = "{{ .ModuleGitUrlBase }}?ref={{ .ModuleLatestTag }}"
+
+  # See inputs below for additional required parameters
+}
+```

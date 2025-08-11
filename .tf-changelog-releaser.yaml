@@ -1,0 +1,7 @@
+# tf-changelog-releaser config
+docs_directory: docs/
+changelog:
+  name: CHANGELOG.md
+  enabled: true
+modules:
+  directory: examples/tf-modules/modules
