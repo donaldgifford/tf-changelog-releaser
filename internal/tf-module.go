@@ -11,39 +11,41 @@ import (
 
 type TerraformModules struct {
 	Path    string
-	Modules []TfModule
+	Modules []*TfModule
 }
 
 type TfModule struct {
-	D    fs.DirEntry
-	Path string
+	D       fs.DirEntry
+	Path    string
+	Content string
 }
 
 func NewTerraformModule() *TerraformModules {
 	return &TerraformModules{}
 }
 
-func (t *TerraformModules) GenerateDocs() (string, error) {
-	// 	tempString := `
-	// # My super cool template
+func (t *TerraformModules) GenerateDocs() error {
+	// tempString := `
+	//  # My super cool template
 	//
-	// <!-- BEGIN_TF_DOCS -->
-	// {{ .Content }}
-	// <!-D- END_TF_DOCS -->
-	// `
+	//  <!-- BEGIN_TF_DOCS -->
+	//  {{ .Content }}
+	//  <!-D- END_TF_DOCS -->
+	//  `
 
 	for _, tf := range t.Modules {
 		d, err := BuildTerraformDocs(tf)
-		// d, err := BuildTerraformDocs(t.Path, tempString)
 		if err != nil {
-			return "", err
+			return err
 		}
 
-		fmt.Println(d)
+		tf.Content = d
+
+		// fmt.Println(tf.Content)
 
 	}
 
-	return "", nil
+	return nil
 }
 
 func (t *TerraformModules) tfModuleDirWalker(
@@ -68,7 +70,7 @@ func (t *TerraformModules) tfModuleDirWalker(
 					)
 					t.Modules = append(
 						t.Modules,
-						TfModule{
+						&TfModule{
 							D:    d,
 							Path: fmt.Sprintf("%s/%s", t.Path, d.Name()),
 						},

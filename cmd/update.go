@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/donaldgifford/tf-changelog-releaser/internal"
+	"github.com/donaldgifford/tf-changelog-releaser/internal/templates"
 	"github.com/spf13/cobra"
 )
 
@@ -27,8 +28,13 @@ to quickly create a Cobra application.`,
 			return
 		}
 
-		mods.GenerateDocs()
-		// string
+		if err = mods.GenerateDocs(); err != nil {
+			return
+		}
+
+		tt := templates.NewTemplateExecutor()
+		// fmt.Println(mods.Modules[0].Content)
+		fmt.Println(tt.ExecuteModule(mods.Modules[0]))
 	},
 }
 

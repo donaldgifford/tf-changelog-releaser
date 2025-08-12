@@ -7,8 +7,8 @@ import (
 )
 
 // BuildTerraformDocs for module root `path` and provided content `tmpl`.
-func BuildTerraformDocs(tf TfModule) (string, error) {
-	// func BuildTerraformDocs(path string, tmpl string) (string, error) {
+func BuildTerraformDocs(tf *TfModule) (string, error) {
+	// func BuildTerraformDocs(tf TfModule, tmpl string) (string, error) {
 	config := print.DefaultConfig()
 	config.ModuleRoot = tf.Path // module root path (can be relative or absolute)
 

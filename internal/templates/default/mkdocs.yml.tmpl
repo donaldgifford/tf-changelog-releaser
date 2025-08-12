@@ -1,0 +1,11 @@
+site_name: {{.SiteName}}
+site_description: {{.SiteDescription}}
+plugins:
+  - techdocs-core
+nav:
+  - Getting Started: index.md
+  - Latest Changes: CHANGELOG.md
+{{if .Modules}}
+  - Modules:{{range .Modules}}
+    - {{.}}: modules/{{.}}.md{{end}}{{end}}
+
